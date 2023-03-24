@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: functional-tests
     steps:
-      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       # Install the dependencies and update plantuml.
       # The Ubuntu's plantuml version is old and doesn't support some features
       # used by RSTUF.
@@ -33,7 +33,7 @@ jobs:
         run: |
           pipenv run make docs
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@38e0b6e68b4c852a5500a94740f0e535e0d7ba54
+        uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync git submodules and docs"

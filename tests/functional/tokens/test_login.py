@@ -15,6 +15,7 @@ def test_login_using_rstuf_api():
     target_fixture="data",
 )
 def the_api_requester_prepares_data(username, password, scope, expires):
+
     if expires == "None":
         expires = None
     else:
