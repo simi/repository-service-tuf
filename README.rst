@@ -1,6 +1,12 @@
 Repository Service for TUF (RSTUF)
 ==================================
 
+|OpenSSF Best Practices|
+
+.. |OpenSSF Best Practices| image:: https://bestpractices.coreinfrastructure.org/projects/6587/badge
+  :target: https://bestpractices.coreinfrastructure.org/projects/6587
+
+
 .. note::
 
     Repository Service for TUF is a *work in progress*.
@@ -76,6 +82,6 @@ Check our `CONTRIBUTING.rst <CONTRIBUTING.rst>`_ for more details on how to
 contribute.
 
 Please, check the `Repository Service for TUF Development Guide
-<https://repository-service-tuf.readthedocs.org/devel>`_.
+<https://repository-service-tuf.readthedocs.io/en/latest/devel/>`_.
 
 .. _ROADMAP: ROADMAP.rst

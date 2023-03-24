@@ -381,6 +381,39 @@
                 ]
             }
         },
+        "/api/v1/targets/publish/": {
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Submit a task to publish targets.Scope: write:targets",
+                "description": "Trigger a task to publish targets not yet published from the RSTUF Database",
+                "operationId": "post_publish_targets_api_v1_targets_publish__post",
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/repository_service_tuf_api__targets__Response"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "write:targets"
+                        ]
+                    }
+                ]
+            }
+        },
         "/api/v1/task/": {
             "get": {
                 "tags": [
@@ -454,6 +487,18 @@
                         "items": {
                             "$ref": "#/components/schemas/Targets"
                         }
+                    },
+                    "add_task_id_to_custom": {
+                        "title": "Add Task Id To Custom",
+                        "type": "boolean",
+                        "description": "Whether to add the id of the task in custom",
+                        "default": false
+                    },
+                    "publish_targets": {
+                        "title": "Publish Targets",
+                        "type": "boolean",
+                        "description": "Whether to publish the targets",
+                        "default": true
                     }
                 },
                 "description": "POST method required Payload.",
@@ -476,9 +521,6 @@
                                 "length": 630,
                                 "hashes": {
                                     "blake2b-256": "69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9"
-                                },
-                                "custom": {
-                                    "key": "value"
                                 }
                             },
                             "path": "file2.tar.gz"
@@ -1332,6 +1374,12 @@
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "publish_targets": {
+                        "title": "Publish Targets",
+                        "type": "boolean",
+                        "description": "Whether to publish the targets changes",
+                        "default": true
                     }
                 },
                 "description": "DELETE method required Payload.",
