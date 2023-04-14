@@ -20,7 +20,7 @@ on:
         required: False
       online_key_path:
         description: "Local path for online key"
-        default: "tests/files/key_storage/online.key"
+        default: "./tests/files/key_storage/"
         type: string
         required: False
   workflow_call:
@@ -42,7 +42,7 @@ on:
         required: False
       online_key_path:
         description: "Local KeyVault path"
-        default: "tests/files/key_storage/"
+        default: "./tests/files/key_storage/"
         type: string
         required: False        
 env:
