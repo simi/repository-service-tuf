@@ -18,6 +18,11 @@ on:
         default: "latest"
         type: string
         required: False
+      online_key_path:
+        description: "Local path for online key"
+        default: "tests/files/key_storage/online.key"
+        type: string
+        required: False
   workflow_call:
     inputs:
       api_version:
@@ -35,6 +40,11 @@ on:
         default: "latest"
         type: string
         required: False
+      online_key_path:
+        description: "Local KeyVault path"
+        default: "tests/files/key_storage/"
+        type: string
+        required: False        
 env:
   MAKE_FT_TARGET: functional-tests
   REQUIREMENTS_PATH: requirements.txt
@@ -66,7 +76,7 @@ jobs:
         volumes:
           - rstuf-worker-data:/data
           - rstuf-storage:/var/opt/repository-service-tuf/storage
-          - rstuf-keystorage:/var/opt/repository-service-tuf/keystorage
+          - ${{ inputs.online_key_path }}:/var/opt/repository-service-tuf/keystorage
         env:
           RSTUF_STORAGE_BACKEND: LocalStorage
           RSTUF_KEYVAULT_BACKEND: LocalKeyVault
@@ -83,7 +93,7 @@ jobs:
         volumes:
           - rstuf-worker-data:/data
           - rstuf-storage:/var/opt/repository-service-tuf/storage
-          - rstuf-keystorage:/var/opt/repository-service-tuf/keystorage
+          - ${{ inputs.online_key_path }}:/var/opt/repository-service-tuf/keystorage
         env:
           RSTUF_STORAGE_BACKEND: LocalStorage
           RSTUF_KEYVAULT_BACKEND: LocalKeyVault
@@ -122,13 +132,6 @@ jobs:
            repository: vmware/repository-service-tuf
            path: rstuf-umbrella
            ref: main
-
-      - name: Deploy online.key to Docker Volume
-        # This is an workaround for the issue https://github.com/vmware/repository-service-tuf-worker/issues/241
-        # Once solving it:
-        # 1. Change workers to use secrets with the online key
-        # 2. Remove this step
-        run: docker cp tests/files/key_storage/online.key "${{ job.services.rstuf-worker-1.id }}:/var/opt/repository-service-tuf/keystorage/"
 
       - name: Get RSTUF Container logs
         run: |
